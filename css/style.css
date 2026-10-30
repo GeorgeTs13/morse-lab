@@ -16,9 +16,17 @@
     box-sizing: border-box;
 }
 
+html {
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
     background:
         radial-gradient(ellipse at 50% 0%, #16233b 0%, transparent 55%),
         var(--background);
@@ -28,12 +36,17 @@ body {
 }
 
 button,
-textarea {
+textarea,
+select {
     font: inherit;
 }
 
 button {
     cursor: pointer;
+}
+
+a {
+    color: var(--accent);
 }
 
 .topbar {
@@ -107,6 +120,7 @@ h1 {
     font-size: clamp(36px, 6vw, 58px);
     line-height: 1.15;
     letter-spacing: -2px;
+    overflow-wrap: anywhere;
 }
 
 h1 span {
@@ -293,6 +307,7 @@ button:focus-visible {
     display: flex;
     align-items: center;
     gap: 13px;
+    min-width: 0;
     padding: 17px;
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -334,6 +349,114 @@ button:focus-visible {
     font-size: 10px;
 }
 
+/* Shared navigation */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin-bottom: 24px;
+}
+
+nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Alphabet page */
+.alphabet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+}
+
+.morse-card {
+    min-width: 0;
+    padding: 18px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.morse-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.morse-card h2 {
+    margin: 0 0 8px;
+}
+
+.morse-card p {
+    margin: 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+}
+
+/* Guide and lesson sections */
+.guide-section,
+.lesson {
+    min-width: 0;
+    margin-bottom: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+}
+
+.guide-section h2,
+.lesson h2 {
+    margin-top: 0;
+}
+
+.guide-section p,
+.guide-section li {
+    overflow-wrap: anywhere;
+}
+
+.guide-section .signal {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 5px 12px;
+}
+
+.lesson button,
+.lesson select {
+    max-width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 7px;
+    background: var(--surface-raised);
+    color: var(--text);
+}
+
+.lesson button:hover {
+    background: var(--accent-dark);
+}
+
+.lesson button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pattern {
+    color: var(--accent);
+    font-size: 2rem;
+    letter-spacing: 5px;
+    overflow-wrap: anywhere;
+}
+
+/* Tablet */
 @media (max-width: 760px) {
     .intro {
         padding-top: 45px;
@@ -360,8 +483,10 @@ button:focus-visible {
     }
 }
 
+/* Mobile */
 @media (max-width: 420px) {
     .topbar {
+        flex-wrap: wrap;
         padding: 15px 18px;
     }
 
@@ -373,6 +498,27 @@ button:focus-visible {
         width: calc(100% - 28px);
     }
 
+    .intro {
+        padding-top: 35px;
+    }
+
+    h1 {
+        font-size: clamp(32px, 10vw, 42px);
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    nav {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
     .panel-heading,
     .panel-footer {
         padding: 12px;
@@ -382,7 +528,41 @@ button:focus-visible {
         max-width: 110px;
     }
 
+    .alphabet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .morse-card {
+        padding: 15px 8px;
+    }
+
+    .guide-section,
+    .lesson {
+        padding: 15px;
+    }
+
+    .lesson select {
+        width: 100%;
+    }
+
     .footer {
         flex-direction: column;
+    }
+}
+
+/* Very narrow screens */
+@media (max-width: 320px) {
+    .container {
+        width: calc(100% - 20px);
+    }
+
+    .alphabet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panel-heading,
+    .panel-footer {
+        flex-wrap: wrap;
     }
 }
