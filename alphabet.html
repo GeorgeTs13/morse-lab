@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Lab | Alphabet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 12px;
+        }
+        .morse-card {
+            background: #1b2932;
+            border: 1px solid #34434d;
+            border-radius: 10px;
+            padding: 18px 10px;
+            text-align: center;
+            cursor: pointer;
+            color: inherit;
+        }
+        .morse-card:hover {
+            border-color: #35c9b0;
+            transform: translateY(-2px);
+        }
+        .morse-card h2 { margin: 0 0 8px; }
+        .morse-card p {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin: 0;
+            color: #35c9b0;
+        }
+        .section-title { margin: 28px 0 14px; }
+        nav { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 24px; }
+        nav a { color: #35c9b0; }
+        .hint { opacity: .75; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Morse Alphabet</h1>
+            <p>Every character, one signal at a time.</p>
+        </header>
+
+        <nav>
+            <a href="index.html">Translator</a>
+            <a href="alphabet.html">Alphabet</a>
+            <a href="guide.html">Guide</a>
+            <a href="lessons.html">Lessons</a>
+        </nav>
+
+        <p class="hint">Select any character to hear its Morse code.</p>
+
+        <h2 class="section-title">Letters</h2>
+        <div id="letters" class="alphabet-grid"></div>
+
+        <h2 class="section-title">Numbers</h2>
+        <div id="numbers" class="alphabet-grid"></div>
+
+        <h2 class="section-title">Punctuation</h2>
+        <div id="punctuation" class="alphabet-grid"></div>
+
+        <p id="status" aria-live="polite"></p>
+    </main>
+
+    <script src="js/morse.js"></script>
+    <script>
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playCharacter(code) {
+            if (!code) return;
+
+            audioContext.resume();
+
+            const unit = 0.1;
+            const frequency = 600;
+            let time = audioContext.currentTime + 0.05;
+
+            for (let i = 0; i < code.length; i++) {
+                const symbol = code[i];
+
+                if (symbol !== '.' && symbol !== '-') continue;
+
+                const duration = symbol === '.' ? unit : unit * 3;
+                const oscillator = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+
+                oscillator.frequency.value = frequency;
+                oscillator.connect(gain);
+                gain.connect(audioContext.destination);
+
+                gain.gain.setValueAtTime(0, time);
+                gain.gain.setValueAtTime(0.15, time + 0.005);
+                gain.gain.setValueAtTime(0, time + duration);
+
+                oscillator.start(time);
+                oscillator.stop(time + duration);
+
+                time += duration + unit;
+            }
+        }
+
+        function createCards(containerId, characters) {
+            const container = document.getElementById(containerId);
+
+            characters.forEach(character => {
+                const code = MORSE_CODE[character];
+                if (!code) return;
+
+                const card = document.createElement('button');
+                card.className = 'morse-card';
+                card.type = 'button';
+                card.innerHTML = `
+                    <h2>${character}</h2>
+                    <p>${code}</p>
+                `;
+
+                card.addEventListener('click', () => {
+                    playCharacter(code);
+                    document.getElementById('status').textContent =
+                        `Playing ${character}: ${code}`;
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        createCards('letters', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
+        createCards('numbers', '0123456789'.split(''));
+        createCards(
+            'punctuation',
+            ".,?'!/()&:;=+-_\"$@".split('')
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Lab | Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .guide-section {
+            background: #1b2932;
+            border: 1px solid #34434d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .signal {
+            color: #35c9b0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 24px; }
+        nav a { color: #35c9b0; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Morse Code Guide</h1>
+            <p>Understand the language of dots and dashes.</p>
+        </header>
+
+        <nav>
+            <a href="index.html">Translator</a>
+            <a href="alphabet.html">Alphabet</a>
+            <a href="guide.html">Guide</a>
+            <a href="lessons.html">Lessons</a>
+        </nav>
+
+        <section class="guide-section">
+            <h2>The two basic signals</h2>
+            <p class="signal">. Dot</p>
+            <p>A short signal. One time unit.</p>
+
+            <p class="signal">− Dash</p>
+            <p>A long signal. Three time units.</p>
+        </section>
+
+        <section class="guide-section">
+            <h2>Timing matters</h2>
+            <ul>
+                <li>Dot: 1 unit.</li>
+                <li>Dash: 3 units.</li>
+                <li>Between parts of one letter: 1 unit.</li>
+                <li>Between letters: 3 units.</li>
+                <li>Between words: 7 units.</li>
+            </ul>
+        </section>
+
+        <section class="guide-section">
+            <h2>Example: SOS</h2>
+            <p class="signal">... --- ...</p>
+            <p>S = three dots.</p>
+            <p>O = three dashes.</p>
+            <p>S = three dots.</p>
+            <p>SOS is a well-known international distress signal.</p>
+        </section>
+
+        <section class="guide-section">
+            <h2>How to tap Morse code</h2>
+            <ol>
+                <li>Choose a letter.</li>
+                <li>Read its dot and dash pattern.</li>
+                <li>Tap short for every dot.</li>
+                <li>Hold three times as long for every dash.</li>
+                <li>Pause briefly between signals in the same letter.</li>
+                <li>Pause longer before starting the next letter.</li>
+            </ol>
+        </section>
+
+        <section class="guide-section">
+            <h2>Learning advice</h2>
+            <ul>
+                <li>Learn the sound, not just the visual pattern.</li>
+                <li>Practice listening as well as sending.</li>
+                <li>Start slowly and gradually increase speed.</li>
+                <li>Practice regularly instead of memorizing everything at once.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
