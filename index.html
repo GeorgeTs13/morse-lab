@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="description" content="Learn and translate International Morse code.">
+    <title>Morse Lab — Translator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/morse.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="Morse Lab home">
+            <span class="brand-mark">M</span>
+            <span>MORSE<span class="brand-accent">LAB</span></span>
+        </a>
+        <span class="version">LOCAL TOOL / V1</span>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <p class="eyebrow">SIGNAL TRANSLATION SYSTEM</p>
+            <h1>Decode the <span>signal.</span></h1>
+            <p class="subtitle">
+                Translate text into Morse code, or turn Morse signals back
+                into readable text.
+            </p>
+        </section>
+
+        <section class="translator" aria-label="Morse translator">
+            <article class="panel">
+                <div class="panel-heading">
+                    <label for="text-input">01 / TEXT INPUT</label>
+                    <span class="panel-tag">A — Z · 0 — 9</span>
+                </div>
+
+                <textarea
+                    id="text-input"
+                    placeholder="Type something here...&#10;&#10;Example: SOS"
+                    spellcheck="false"
+                    autocomplete="off"
+                ></textarea>
+
+                <div class="panel-footer">
+                    <span id="text-count">0 characters</span>
+                    <button id="clear-text" class="text-button" type="button">
+                        Clear
+                    </button>
+                </div>
+            </article>
+
+            <div class="direction" aria-hidden="true">
+                <span>↕</span>
+                <small>TRANSLATE</small>
+            </div>
+
+            <article class="panel">
+                <div class="panel-heading">
+                    <label for="morse-input">02 / MORSE INPUT</label>
+                    <span class="panel-tag">. DOT · - DASH</span>
+                </div>
+
+                <textarea
+                    id="morse-input"
+                    placeholder="Morse code appears here...&#10;&#10;Example: ... --- ..."
+                    spellcheck="false"
+                    autocomplete="off"
+                ></textarea>
+
+                <div class="panel-footer">
+                    <span id="morse-count">0 symbols</span>
+                    <button id="clear-morse" class="text-button" type="button">
+                        Clear
+                    </button>
+                </div>
+            </article>
+        </section>
+
+        <section class="status-panel" aria-live="polite" aria-atomic="true">
+            <span class="status-indicator"></span>
+            <p id="status-message">System ready. Start typing to translate.</p>
+        </section>
+
+        <section class="reference">
+            <p class="eyebrow">HOW TO READ IT</p>
+            <div class="reference-grid">
+                <div>
+                    <span class="signal">.</span>
+                    <div>
+                        <strong>Dot</strong>
+                        <p>A short signal</p>
+                    </div>
+                </div>
+                <div>
+                    <span class="signal">-</span>
+                    <div>
+                        <strong>Dash</strong>
+                        <p>A long signal</p>
+                    </div>
+                </div>
+                <div>
+                    <span class="signal">/</span>
+                    <div>
+                        <strong>Word gap</strong>
+                        <p>Separates words</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>MORSE LAB</span>
+            <span>Milestone 1 / Translator</span>
+        </footer>
+    </main>
+</body>
+</html>
